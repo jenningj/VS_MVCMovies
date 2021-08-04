@@ -8,16 +8,35 @@ namespace MvcMovie.Controllers
 
         //Get: Hello World:
 
-        public string Index()
-        {
+        //public string Index()
+        //{
             // https://localhost:5001/HelloWorld.
-            return "This is my default action..";
-        }
+        //    return "This is my default action..";
+        //}
 
-        public string Welcome()
+        // Replaced the initial public string Index() with the method below:
+
+
+        public IActionResult Index()
+        {
+            return View();
+        }
+        
+
+        public IActionResult Welcome(string name, int numTimes= 1)
         {
             //https://localhost:5001//HelloWorld/Welcome/
-            return "This is the Welcome Action Method";
+
+
+            //old method Welcome():
+            //return "This is the Welcome Action Method"; 
+            // new method using view and paramerts:
+
+            ViewData["Message"] = "Hello " + name;
+            ViewData["NumTimes"] = numTimes;
+
+            return View();
+
         }
 
         public string WelcomeParam(string name, int numTimes = 1)
@@ -28,9 +47,6 @@ namespace MvcMovie.Controllers
             return HtmlEncoder.Default.Encode($"Hello {name}, NumTimes is: {numTimes}");
 
         }
-        //public IActionResult Index()
-        //{
-        //    return View();
-        //}
+        
     }
 }
